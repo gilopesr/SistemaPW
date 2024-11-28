@@ -20,3 +20,36 @@ O **Kitty Delivery** prioriza a segurança dos dados dos usuários. O cadastro �
 - **Comunicação Segura**: A comunicação com a API é feita através de HTTPS, garantindo que todos os dados sejam transmitidos de forma segura e protegida contra interceptações.
 
 Esperamos que você tenha uma experiência deliciosa com o Kitty Delivery! 🍰💖
+
+
+function getWeather() {
+    const resultDiv = document.getElementById("result"); 
+
+    const apiKey = "2c9c503160794ddf927211625242711";
+
+    const requestOptions = {
+        method: "GET",
+        redirect: "follow"
+        
+    };
+
+    fetch('http://api.weatherapi.com/v1/current.json?key=2c9c503160794ddf927211625242711&q=s%C3%A3o%20paulo')
+
+        .then((response) => {
+            return response.json();
+        })
+
+        .then((data) => {
+            const { region, country } = data.location;
+            const { temp_c, condition } = data.current;
+
+        
+            resultDiv.innerHTML = `
+                <img src="https:${condition.icon}" alt="${condition.text}"><br>
+                <span id="temp"><strong>${temp_c}°C</strong></span><br>
+                <strong> ${region}, ${country}</strong><br>
+                Condição: <strong>${condition.text}</strong>
+                `;
+        })
+    
+}
